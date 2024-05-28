@@ -40,7 +40,6 @@ class FunctionalOracle:
         return: float
         """
         residual = scipy.integrate.simpson((self._operator_A(x) - self.f) ** 2)
-        # scalar_4 = scipy.integrate.simpson(self.g * x) ** 4
         scalar_2 = scipy.integrate.simpson(self._operator_A(x) * self.k)
 
         return residual + scalar_2
@@ -51,7 +50,6 @@ class FunctionalOracle:
         return: np.array
         """
         residual_grad = 2 * self._conjugate_operator_A(self._operator_A(x) - self.f)
-        scalar_4_grad = 4 * self.g * scipy.integrate.simpson(self.g * x, dx=1/len(x)) ** 3
         scalar_2_grad = self._conjugate_operator_A(self.k)
 
         return residual_grad + scalar_2_grad
